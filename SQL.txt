@@ -1,0 +1,15 @@
+// Создание всех необходимых таблиц
+CREATE TABLE Products(id INT PRIMARY KEY NOT NULL, product NVARCHAR(100) NOT NULL);
+CREATE TABLE Categories(id INT PRIMARY KEY NOT NULL, category NVARCHAR(100) NOT NULL);
+CREATE TABLE Relationships(product_id INT NOT NULL, category_id INT NOT NULL);
+
+//Заполнение таблиц
+INSERT INTO Products VALUES(1, N'Хлеб'), (2, N'Бумага'), (3, N'Ножницы'), (4, N'Очки'), (5, N'Телефон');
+INSERT INTO Categories VALUES(1, N'Еда'), (2, N'Канцелярия'), (3, N'Хозтовары'), (4, N'Оптика'), (5, N'Аксессуары');
+INSERT INTO Relationships VALUES(1, 1), (2, 2), (3, 2), (4, 4), (4, 5);
+
+//Требуемый запрос
+SELECT Products.product, Categories.category FROM Products
+LEFT JOIN Relationships ON Products.id = Relationships.product_id
+LEFT JOIN Categories ON Categories.id = Relationships.category_id
+ORDER BY Products.product
